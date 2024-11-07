@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "1": "tsc && node ./dist/1.number_addition/index.js",
+    "2": "tsc && node ./dist/2.sator-square/index.js",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +24,8 @@
         "always"
       ]
     }
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1"
   }
 }

@@ -18,17 +18,14 @@ function NumberAddition(str) {
     let concatNumber = '';
     for (let i = 0; i <= str.length; i++) {
         if (isNaN(+str[i]) || str[i] === ' ') {
-            console.log('totalSum', totalSum);
             totalSum += +concatNumber;
             concatNumber = '';
         }
         else {
-            console.log('Number', str[i]);
             concatNumber += str[i];
         }
     }
     return totalSum;
 }
-// NumberAddition('75Number9');
 // console.log(NumberAddition("75Number9"));
-console.log(NumberAddition("10 2One@ # _ Number*1*"));
+console.log(NumberAddition("10 2One@# Number*1*"));
