@@ -1,11 +1,25 @@
 {
   "name": "technical-tests",
   "version": "1.0.0",
+  "type": "commonjs",
   "description": "differents technical test to put me on approval",
   "main": "index.js",
   "scripts": {
+    "1": "node ./1.number-addition/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "standard": "^17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "standard",
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ]
+    }
+  }
 }
