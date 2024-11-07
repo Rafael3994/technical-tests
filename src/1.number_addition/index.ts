@@ -17,18 +17,22 @@
 // INPUT: "10 2One Number*1*"
 // OUTPUT: 13
 
-function NumberAddition (str) {
-  // get the numbers
-  for (let i = 0; i < str.length; i++) {
-    if (isNaN(str[i])) {
-      console.log('No', str[i]);
+function NumberAddition(str: string) {
+  let totalSum: number = 0;
+  // string to concat the following numbers
+  let concatNumber: string = '';
+
+  for (let i = 0; i <= str.length; i++) {
+    if (isNaN(+str[i]) || str[i] === ' ') {
+      totalSum += +concatNumber;
+      concatNumber = '';
     } else {
-      console.log('Yes', str[i]);
+      concatNumber += str[i];
     }
   }
 
-  return str;
+  return totalSum;
 }
 
-NumberAddition('75Number9');
 // console.log(NumberAddition("75Number9"));
+console.log(NumberAddition("10 2One@# Number*1*"));

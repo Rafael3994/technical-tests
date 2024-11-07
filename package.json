@@ -5,13 +5,15 @@
   "description": "differents technical test to put me on approval",
   "main": "index.js",
   "scripts": {
-    "1": "node ./1.number-addition/index.js",
+    "1": "tsc && node ./dist/1.number_addition/index.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "standard": "^17.1.2"
+    "standard": "^17.1.2",
+    "typescript": "^5.6.3"
   },
   "eslintConfig": {
     "extends": "standard",
