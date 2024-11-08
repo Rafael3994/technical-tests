@@ -2,3 +2,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 10vh 1fr;
+    gap: 15px;
+    overflow: auto;
+}
+
+@media (width <=870px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh 80vh 80vh;
+        gap: 15px;
+    }
+}

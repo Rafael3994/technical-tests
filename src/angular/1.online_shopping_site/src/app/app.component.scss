@@ -1,0 +1,36 @@
+.header {
+    background-color: lightblue;
+    padding: 10px;
+    text-align: center;
+}
+
+.content-left {
+    grid-column: 1 / 2;
+    grid-row: 2 /3;
+    background-color: lightcoral;
+    padding: 10px;
+}
+
+.content-right {
+    grid-column: 2 / 3;
+    grid-row: 2 /3;
+    background-color: lightgreen;
+    padding: 10px;
+}
+
+
+@media (width <=870px) {
+    .content-left {
+        grid-column: 1 / -1;
+        grid-row: 2 /3;
+        background-color: lightcoral;
+        padding: 10px;
+    }
+
+    .content-right {
+        grid-column: 1 / -1;
+        grid-row: 3 /4;
+        background-color: lightgreen;
+        padding: 10px;
+    }
+}
