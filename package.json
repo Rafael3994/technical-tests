@@ -5,9 +5,14 @@
   "description": "differents technical test to put me on approval",
   "main": "index.js",
   "scripts": {
-    "1": "tsc && node ./dist/1.number_addition/index.js",
-    "2": "tsc && node ./dist/2.sator-square/index.js",
-    "3": "tsc && node ./dist/3.sort_by_name/index.js",
+
+    "typescript-1": "tsc && node ./dist/1.number_addition/index.js",
+    "typescript-2": "tsc && node ./dist/2.sator-square/index.js",
+    "typescript-3": "tsc && node ./dist/3.sort_by_name/index.js",
+
+    "angular-1": "cd ./src/angular/1.online_shopping_site && ng serve",
+    
+
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
