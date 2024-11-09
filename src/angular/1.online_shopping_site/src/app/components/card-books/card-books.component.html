@@ -1,3 +1,4 @@
+@if (book) {
 <header class="flex justify-center items-center">
     <h1 class="font-semibold text-center">{{book.title.toUpperCase()}}</h1>
 </header>
@@ -6,6 +7,11 @@
     <p class="pt-4 overflow-hidden text-ellipsis">{{book.synopsis}}</p>
 </section>
 <footer class="flex justify-around items-center">
+    @if (isCanRemove) {
+    <button (click)="addBookToAbleBooks(book)">Eliminar</button>
+    } @else {
     <a>Detalles</a>
-    <button>Añadir</button>
+    <button (click)="addBookToReadingList(book)">Añadir</button>
+    }
 </footer>
+}

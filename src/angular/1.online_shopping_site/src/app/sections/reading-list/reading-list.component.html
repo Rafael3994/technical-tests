@@ -1,1 +1,14 @@
-<p>reading-list works!</p>
+<div class="w-full h-full flex flex-col justify-center items-center border-4 rounded-3xl">
+    <header class="h-[10%] w-full flex justify-center items-center">
+        <h2 class="font-bold text-3xl -tracking-tighter underline underline-offset-8">READING LIST</h2>
+    </header>
+    <section class="content-books h-[90%] w-full p-5 overflow-auto">
+        <ng-container *ngIf="books$ | async as booksToShow">
+            @for (book of booksToShow; track book.ISBN) {
+            <article>
+                <app-card-books [book]="book" [isCanRemove]="true" />
+            </article>
+            }
+        </ng-container>
+    </section>
+</div>

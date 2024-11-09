@@ -26,7 +26,13 @@
     "baseUrl": "./",
     "paths": {
       "@assets/*": [
-        "assets/*"
+        "src/assets/*"
+      ],
+      "@api/*": [
+        "src/api/*"
+      ],
+      "@components/*": [
+        "src/app/components/*"
       ],
     }
   },

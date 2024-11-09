@@ -20,7 +20,7 @@ export interface Book {
   providedIn: 'root'
 })
 export class ApiBooksService {
-  private jsonUrl = 'assets/books.json';
+  private jsonUrl = './assets/books.json';
   constructor(private http: HttpClient) { }
 
   getAllBooks(): Observable<{ library: { book: Book }[] }> {

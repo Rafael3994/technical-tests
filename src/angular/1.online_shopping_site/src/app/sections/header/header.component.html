@@ -1,3 +1,9 @@
-<div>
-    HEADER
-</div>
+<ng-container *ngIf="books$ | async as books">
+    <div class="h-full w-full flex flex-col text-xl">
+        <div>
+            <h1>Libros disponibles: {{books.ableBooks.length}}</h1>
+            <h2>Libros en la lista de lectura: {{books.readingListBooks.length}}</h2>
+            <h2>Libros disponibles del genero: </h2>
+        </div>
+    </div>
+</ng-container>
