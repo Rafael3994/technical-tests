@@ -1,0 +1,15 @@
+.content-books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    grid-auto-rows: 440px;
+    gap: 30px;
+    overflow: auto;
+}
+
+app-card-books {
+    height: 90%;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 70% 20%;
+}

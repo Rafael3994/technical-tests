@@ -4,18 +4,15 @@
 En la UI debe quedar claro qué libros están en la lista de lectura y cuáles no. También debe ser posible mover un libro de la 
 lista de lectura a la lista de disponibles. -->
 
-<!-- <header class="w-full h-full bg-green-200">
-  8 Libros Disponibles
-  <br>
-  2 en la lista de lectura
+<header class="header">
+  <app-header />
 </header>
-
-<main class="w-full h-full bg-red-400"></main>
-<aside class="w-full h-full bg-yellow-400"></aside> -->
-
-<header class="header"></header>
-<div class="content-left m-3">Contenido Izquierdo</div>
-<div class="content-right m-3">Contenido Derecho</div>
+<main class="content-left m-3">
+  <app-content-books />
+</main>
+<aside class="content-right m-3">
+  <app-reading-list />
+</aside>
 
 
 

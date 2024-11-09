@@ -1,0 +1,16 @@
+footer>* {
+    height: 2rem;
+    width: 100px;
+    border-radius: 0.75rem;
+    border-width: 1.5px;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+        transition: all 150ms ease-in-out;
+    }
+}

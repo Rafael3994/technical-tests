@@ -1,0 +1,7 @@
+<section class="content-books">
+    @for (book of booksToShow; track book.ISBN) {
+    <article class="">
+        <app-card-books [book]="book"></app-card-books>
+    </article>
+    }
+</section>

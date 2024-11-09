@@ -1,0 +1,11 @@
+<header class="flex justify-center items-center">
+    <h1 class="font-semibold text-center">{{book.title.toUpperCase()}}</h1>
+</header>
+<section class="flex flex-col items-center w-full mt-7">
+    <img src="{{book.cover}}" alt="{{book.title}}" class="h-44 w-32" />
+    <p class="pt-4 overflow-hidden text-ellipsis">{{book.synopsis}}</p>
+</section>
+<footer class="flex justify-around items-center">
+    <a>Detalles</a>
+    <button>Añadir</button>
+</footer>
