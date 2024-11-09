@@ -1,3 +1,11 @@
+.container {
+    height: 90%;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 70% 20%;
+}
+
 footer>* {
     height: 2rem;
     width: 100px;

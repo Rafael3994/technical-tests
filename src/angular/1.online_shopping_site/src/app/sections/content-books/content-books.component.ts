@@ -21,10 +21,4 @@ export class ContentBooksComponent {
   constructor(private store: Store<BooksState>) {
     this.books$ = this.store.pipe(select(state => state.books.ableBooks));
   }
-
-  ngOnInit(): void {
-    this.books$.subscribe(books => console.log(books)
-    )
-  }
-
 }

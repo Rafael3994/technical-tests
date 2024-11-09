@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { addAbleBooks, changeBookToAbleBooks, changeBookToReadingListBook, } from './books.actions';
+import { addAllBooks, changeBookToAbleBooks, changeBookToReadingListBook, } from './books.actions';
 import { Book } from '@api/api-books/api-books.service';
 
 export const initialState:
@@ -15,10 +15,10 @@ export const initialState:
 export type BooksState = { books: { ableBooks: Book[], readingListBooks: Book[] } };
 
 const _booksReducer = createReducer(initialState,
-    on(addAbleBooks, (state, { newBook }) => {
+    on(addAllBooks, (state, { books }) => {
         return {
             ...state,
-            ableBooks: [...state.ableBooks, newBook]
+            ableBooks: books
         }
     }),
     on(changeBookToReadingListBook, (state, book) => {
