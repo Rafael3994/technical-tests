@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Book } from '@api/api-books/api-books.service';
 import { changeBookToAbleBooks, changeBookToReadingListBook } from '@api/ngrx/books/books.actions';
-import { BooksState } from '@api/ngrx/books/books.reducer';
-import { Store } from '@ngrx/store';
+import { TBooksState } from '@api/ngrx/books/books.reducer';
+import { select, Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-card-books',
@@ -15,7 +16,7 @@ export class CardBooksComponent {
   @Input() book: Book | undefined;
   @Input() isCanRemove: boolean | undefined = false;
 
-  constructor(private store: Store<BooksState>) {
+  constructor(private store: Store<TBooksState>) {
   }
 
   addBookToReadingList(book: Book): void {

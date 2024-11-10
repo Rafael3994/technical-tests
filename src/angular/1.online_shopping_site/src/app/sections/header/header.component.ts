@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Book } from '@api/api-books/api-books.service';
-import { BooksState } from '@api/ngrx/books/books.reducer';
+import { TBooksState, TReducerBooksState } from '@api/ngrx/books/books.reducer';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -13,9 +12,14 @@ import { Observable } from 'rxjs';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  books$: Observable<{ ableBooks: Book[], readingListBooks: Book[] }>
+  books$: Observable<TBooksState>
+  lengthBooksCategory: number = 0
 
-  constructor(private store: Store<BooksState>) {
+  constructor(private store: Store<TReducerBooksState>) {
     this.books$ = this.store.pipe(select(state => state.books))
+    this.books$.subscribe(({ ableBooks, categorySelected }) => {
+
+      this.lengthBooksCategory = ableBooks.filter(book => book.genre === categorySelected).length
+    })
   }
 }

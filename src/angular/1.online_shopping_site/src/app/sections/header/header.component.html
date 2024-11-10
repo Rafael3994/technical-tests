@@ -3,7 +3,10 @@
         <div>
             <h1>Libros disponibles: {{books.ableBooks.length}}</h1>
             <h2>Libros en la lista de lectura: {{books.readingListBooks.length}}</h2>
-            <h2>Libros disponibles del genero: </h2>
+            <h2 *ngIf="books.categorySelected">Libros disponibles del genero
+                <span><em>{{books.categorySelected}}</em></span>
+                : {{lengthBooksCategory}}
+            </h2>
         </div>
     </div>
 </ng-container>

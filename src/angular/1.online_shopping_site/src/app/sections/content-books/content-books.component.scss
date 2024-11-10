@@ -1,6 +1,6 @@
 .content-books {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
     grid-auto-rows: 440px;
     gap: 30px;
     overflow: auto;

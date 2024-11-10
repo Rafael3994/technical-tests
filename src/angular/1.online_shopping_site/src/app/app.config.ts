@@ -6,11 +6,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { booksReducer } from '@api/ngrx/books/books.reducer';
 import { CommonModule } from '@angular/common';
+import { provideEffects } from '@ngrx/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
     provideHttpClient(),
-    provideStore({ books: booksReducer })
-  ]
+    provideStore({ books: booksReducer }),
+    provideEffects()
+]
 };

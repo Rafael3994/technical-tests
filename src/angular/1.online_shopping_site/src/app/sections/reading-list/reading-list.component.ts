@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BooksState } from '@api/ngrx/books/books.reducer';
+import { TReducerBooksState } from '@api/ngrx/books/books.reducer';
 import { select, Store } from '@ngrx/store';
 import { CardBooksComponent } from "../../components/card-books/card-books.component";
 import { Book } from '@api/api-books/api-books.service';
@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class ReadingListComponent {
   books$: Observable<Book[]>;
 
-  constructor(private store: Store<BooksState>) {
+  constructor(private store: Store<TReducerBooksState>) {
     this.books$ = this.store.pipe(select(state => state.books.readingListBooks));
   }
 

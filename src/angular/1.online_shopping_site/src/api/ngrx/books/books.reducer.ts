@@ -1,41 +1,44 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { addAllBooks, changeBookToAbleBooks, changeBookToReadingListBook, } from './books.actions';
-import { Book } from '@api/api-books/api-books.service';
+import { addAllBooks, changeBookToAbleBooks, changeBookToReadingListBook, filterCategoryBooksSelected, } from './books.actions';
+import { Book, ECategories } from '@api/api-books/api-books.service';
 
-export const initialState:
-    {
-        ableBooks: Book[],
-        readingListBooks: Book[]
-    } =
+export type TBooksState = { ableBooks: Book[], readingListBooks: Book[], categorySelected: ECategories | null, };
+export type TReducerBooksState = { books: TBooksState }
+export const initialState: TBooksState =
 {
     ableBooks: [],
-    readingListBooks: []
+    readingListBooks: [],
+    categorySelected: null
 }
 
-export type BooksState = { books: { ableBooks: Book[], readingListBooks: Book[] } };
 
 const _booksReducer = createReducer(initialState,
-    on(addAllBooks, (state, { books }) => {
+    on(addAllBooks, (state, { ableBooks, readingListBooks }) => {
         return {
             ...state,
-            ableBooks: books
+            ableBooks, readingListBooks
         }
     }),
     on(changeBookToReadingListBook, (state, book) => {
         // remove able book
         // add reading list book
         return {
+            ...state,
             ableBooks: state.ableBooks.filter(el => el.ISBN !== book.ISBN),
-            readingListBooks: [...state.readingListBooks, book]
+            readingListBooks: [...state.readingListBooks, book],
         }
     }),
     on(changeBookToAbleBooks, (state, book) => {
+        // remove reading list book
+        // add able book
         return {
+            ...state,
             ableBooks: [...state.ableBooks, book],
-            readingListBooks: state.readingListBooks.filter(el => el.ISBN !== book.ISBN)
+            readingListBooks: state.readingListBooks.filter(el => el.ISBN !== book.ISBN),
         }
-    })
+    }),
+    on(filterCategoryBooksSelected, (state, { categorySelected }) => ({ ...state, categorySelected }))
 )
-export function booksReducer(state: { ableBooks: Book[]; readingListBooks: Book[]; } | undefined, action: Action<string>) {
+export function booksReducer(state: TBooksState | undefined, action: Action<string>) {
     return _booksReducer(state, action);
 }

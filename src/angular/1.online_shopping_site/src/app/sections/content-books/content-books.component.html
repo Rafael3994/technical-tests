@@ -1,7 +1,37 @@
+<section class="h-1/6 w-full">
+    <label>
+        Category
+        <select (change)="handleOnChangeInputSelect($event)" class="ml-3 w-48 h-8 text-black px-2">
+            <option [value]="null">Todas</option>
+            @for (category of categoriesList; track category) {
+            <option [value]="category">{{ category }}</option>
+            }
+        </select>
+    </label>
+</section>
+
 <section class="content-books">
+    <!-- <ng-container *ngIf="books$ | async as booksToShow">
+        <ng-container *ngIf="categorySelected$ | async as selectedCategory">
+            @for (book of booksToShow; track book.ISBN) {
+            <article>
+                <app-card-books [book]="book"></app-card-books>
+            </article>
+            }
+        </ng-container>
+    </ng-container> -->
+
+    <!-- <ng-container *ngIf="booksToShow">
+        @for (book of booksToShow; track book.ISBN) {
+        <article>
+            <app-card-books [book]="book"></app-card-books>
+        </article>
+        }
+    </ng-container> -->
+
     <ng-container *ngIf="books$ | async as booksToShow">
         @for (book of booksToShow; track book.ISBN) {
-        <article class="">
+        <article>
             <app-card-books [book]="book"></app-card-books>
         </article>
         }

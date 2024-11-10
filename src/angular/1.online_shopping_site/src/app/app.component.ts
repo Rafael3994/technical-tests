@@ -6,6 +6,8 @@ import { ReadingListComponent } from "./sections/reading-list/reading-list.compo
 import { ApiBooksService, Book } from '@api/api-books/api-books.service';
 import { Store } from '@ngrx/store';
 import { addAllBooks } from '@api/ngrx/books/books.actions';
+import { TReducerBooksState } from '@api/ngrx/books/books.reducer';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,14 +19,34 @@ import { addAllBooks } from '@api/ngrx/books/books.actions';
 export class AppComponent {
   title = '1.online_shopping_site';
 
+  listsBooks$: Observable<{ ableBooks: Book[], readingListBooks: Book[] }> = of()
+
   constructor(
     private apiBooksService: ApiBooksService,
-    private store: Store
-  ) { }
+    private store: Store<TReducerBooksState>
+  ) {
+    this.listsBooks$ = this.store.select(({ books }) => ({ ableBooks: books.ableBooks, readingListBooks: books.readingListBooks }));
+  }
 
   ngOnInit(): void {
-    this.apiBooksService.getAllBooks().subscribe(({ library }) => {
-      this.store.dispatch(addAllBooks({ books: library.map(({ book }: { book: Book }) => book) }));
+    // Check if I have the info in the localStorage
+    const { ableBooks, readingListBooks } = this.apiBooksService.getLocalStorage()
+
+    if (ableBooks !== null && readingListBooks !== null) {
+      this.apiBooksService.setLocalStorege(ableBooks, readingListBooks);
+      this.store.dispatch(addAllBooks({ ableBooks, readingListBooks }));
+    } else {
+      this.apiBooksService.getAllBooksFromJSON().subscribe(({ library }) => {
+        const ableBooks = library.map(({ book }: { book: Book }) => book);
+
+        this.store.dispatch(addAllBooks({ ableBooks, readingListBooks: [] }));
+        this.apiBooksService.setLocalStorege(ableBooks, [])
+      });
+    }
+
+
+    this.listsBooks$.subscribe(({ ableBooks, readingListBooks }) => {
+      this.apiBooksService.setLocalStorege(ableBooks, readingListBooks);
     });
   }
 }

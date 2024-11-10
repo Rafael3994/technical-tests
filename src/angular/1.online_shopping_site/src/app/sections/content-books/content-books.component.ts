@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ApiBooksService, Book } from '../../../api/api-books/api-books.service';
+import { ApiBooksService, Book, ECategories } from '../../../api/api-books/api-books.service';
 import { CardBooksComponent } from "../../components/card-books/card-books.component";
 import { select, Store } from '@ngrx/store';
-import { createSelector } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { BooksState } from '@api/ngrx/books/books.reducer';
+import { TReducerBooksState } from '@api/ngrx/books/books.reducer';
+import { filterCategoryBooksSelected } from '@api/ngrx/books/books.actions';
 
 
 @Component({
@@ -16,9 +16,28 @@ import { BooksState } from '@api/ngrx/books/books.reducer';
   styleUrl: './content-books.component.scss'
 })
 export class ContentBooksComponent {
-  books$: Observable<Book[]>;
+  books$: Observable<Book[]> = of([]);
+  categoriesList: Array<ECategories> = Object.values(ECategories);
+  booksToShow: Book[] = [];
 
-  constructor(private store: Store<BooksState>) {
-    this.books$ = this.store.pipe(select(state => state.books.ableBooks));
+  constructor(private store: Store<TReducerBooksState>) { }
+
+  ngOnInit() {
+    this.books$ = combineLatest([
+      this.store.pipe(select(state => state.books.ableBooks)),
+      this.store.pipe(select(state => state.books.categorySelected))
+    ]).pipe(
+      map(([ableBooks, categorySelected]) => {
+        return categorySelected === null
+          ? ableBooks
+          : ableBooks.filter(book => book.genre === categorySelected);
+      })
+    );
+  }
+
+
+  handleOnChangeInputSelect(event: Event) {
+    const selectInput = event.target as HTMLSelectElement;
+    this.store.dispatch(filterCategoryBooksSelected({ categorySelected: selectInput.value === "null" ? null : selectInput.value as ECategories }))
   }
 }
