@@ -7,7 +7,7 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export default function TabLayout() {
@@ -15,39 +15,43 @@ export default function TabLayout() {
   const insets = useSafeAreaInsets();
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        tabBarLabelStyle: { fontSize: RFValue(10), marginTop: RFValue(2) },
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          android: {
-            paddingBottom: insets.bottom,
-            height: insets.bottom + 60,
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Libros disponibles',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="book" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="reading-list"
-        options={{
-          title: 'Lista de Lectura',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="star" color={color} />,
-        }}
-      />
-    </Tabs>
+    <SafeAreaProvider>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+          tabBarLabelStyle: { fontSize: RFValue(10), marginTop: RFValue(2) },
+          headerShown: false,
+          tabBarButton: HapticTab,
+          tabBarBackground: TabBarBackground,
+          tabBarStyle: Platform.select({
+            ios: {
+              backgroundColor: 'transparent',
+              paddingBottom: insets.bottom,
+            },
+            android: {
+              paddingBottom: insets.bottom,
+              height: insets.bottom + 60,
+            },
+            default: {
+              height: 60,
+            },
+          }),
+        }}>
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Libros disponibles',
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="book" color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="reading-list"
+          options={{
+            title: 'Lista de Lectura',
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="star" color={color} />,
+          }}
+        />
+      </Tabs>
+    </SafeAreaProvider>
   );
 }
