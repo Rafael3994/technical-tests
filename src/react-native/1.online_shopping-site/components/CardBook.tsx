@@ -1,6 +1,7 @@
 
 import { Book } from "@/api/books";
 import { useBooksContext } from "@/api/books.context";
+import { Link } from "expo-router";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
@@ -44,9 +45,9 @@ const CardBook = ({ book, remove }: { book: Book, remove?: boolean }) => {
                 ) :
                     (
                         <View style={{ marginVertical: 10, flexDirection: 'row', gap: 4, justifyContent: 'space-around' }}>
-                            <TouchableOpacity className='w-32 border-2 py-3 px-4 rounded-2xl '>
+                            <Link href={{ pathname: "/book-details", params: { book: JSON.stringify(book) } }} className='w-32 border-2 py-3 px-4 rounded-2xl '>
                                 <Text style={styles.textButton}>Ver detalles</Text>
-                            </TouchableOpacity>
+                            </Link>
                             <TouchableOpacity
                                 onPress={() => addBookInReadingBooks(book)}
                                 className='w-32 border-2 py-3 px-4 rounded-2xl'>
