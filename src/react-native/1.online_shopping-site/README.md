@@ -14,6 +14,7 @@
 - [ ] Implementa una función `loadReadingList` para cargar la lista de lectura desde `AsyncStorage` cuando la aplicación se inicie.
 - [ ] Dentro de `loadReadingList`, utiliza `JSON.parse` para convertir los datos de vuelta a formato de array después de cargarlos de `AsyncStorage`.
 
+################################################################################
 ### 4. Configurar `AppState` para Detectar Cambios de Estado de la Aplicación
 - [ ] Importa `AppState` desde React Native en el archivo de tu componente principal.
 - [ ] Crea un estado local para almacenar el estado actual de la aplicación (por ejemplo, `const [appState, setAppState] = useState(AppState.currentState);`).
@@ -27,6 +28,7 @@
 ### 6. Configurar el Listener para Cambios en `AppState`
 - [ ] En el `useEffect` principal del componente, configura el listener de `AppState` para que ejecute `handleAppStateChange` cada vez que el estado cambie.
 - [ ] En el mismo `useEffect`, limpia el listener al desmontar el componente para evitar fugas de memoria.
+####################################################
 
 ### 7. Probar la Funcionalidad
 - [ ] Prueba la aplicación agregando algunos elementos a la lista de lectura.

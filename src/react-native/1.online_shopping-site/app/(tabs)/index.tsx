@@ -1,6 +1,5 @@
-import { Book, getAllBooks } from '@/api/books';
+import { Book } from '@/api/books';
 import { useBooksContext } from '@/api/context/books.context';
-import useBooksAsyncStorage from '@/api/asyncStorage/useBooks.localStorage';
 import CardBook from '@/components/CardBook';
 import WrapperCustom from '@/components/WrapperCustom';
 import { useEffect, useState } from 'react';
@@ -28,23 +27,22 @@ export default function HomeScreen() {
         </View>
       </View>
 
-      {
-        books && books.length > 0 && (
-          <FlatList
-            style={{ flexGrow: 1, paddingHorizontal: 15 }}
-            data={books}
-            ItemSeparatorComponent={() => <View style={{ marginVertical: 10 }} />}
-            keyExtractor={(book) => book.ISBN}
-            renderItem={({ item: book }) => (
-              <CardBook book={book} />
-              // <View>
-              //   <Text>{book.cover}</Text>
-              //   <Image  source={{ uri: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1485924654i/34094154.jpg' }}></Image>
-              // </View>
-            )}
-          />
-        )
-      }
+
+      <FlatList
+        style={{ flexGrow: 1, paddingHorizontal: 15 }}
+        data={books}
+        ItemSeparatorComponent={() => <View style={{ marginVertical: 10 }} />}
+        keyExtractor={(book) => book.ISBN}
+        ListEmptyComponent={
+          <View className='flex-1 items-center justify-center'>
+            <Text className='font-semibold'>No hay libros disponibles</Text>
+          </View>
+        }
+        renderItem={({ item: book }) => (
+          <CardBook book={book} />
+        )}
+      />
+
 
     </WrapperCustom>
 

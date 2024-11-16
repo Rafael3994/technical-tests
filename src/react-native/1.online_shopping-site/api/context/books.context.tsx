@@ -1,6 +1,7 @@
 import { Book, getAllBooks } from "@/api/books";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import useBooksAsyncStorage from "../asyncStorage/useBooks.localStorage";
+import { AppState, AppStateStatus } from "react-native";
 
 export interface BooksContextType {
     state: {
@@ -17,6 +18,7 @@ export const BooksContext = createContext<BooksContextType | undefined>(undefine
 
 export const BooksProvider = ({ children }: { children: React.ReactNode }) => {
     const { getBooksFromStorage, setBooksFromStorage } = useBooksAsyncStorage();
+    const appState = useRef(AppState.currentState);
 
     const [state, setState] = useState<{
         ableBooks: Book[];
@@ -27,10 +29,29 @@ export const BooksProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
 
-
     useEffect(() => {
         loadData();
     }, [])
+
+    useEffect(() => {
+        const handleAppStateChange = (nextAppState: AppStateStatus) => {
+            if (appState.current && appState.current !== nextAppState) {
+                console.log({ appState: appState.current, nextAppState });
+                // background: save data
+                if (appState.current === 'inactive' && nextAppState === 'background') {
+                    setBooksFromStorage(state.ableBooks, state.readingList);
+                }
+            }
+            appState.current = nextAppState;
+        }
+
+        const subscription = AppState.addEventListener('change', handleAppStateChange);
+
+        return () => {
+            subscription.remove();
+        };
+
+    }, []);
 
     useEffect(() => {
         if (state.ableBooks.length > 0 || state.readingList.length > 0) {
