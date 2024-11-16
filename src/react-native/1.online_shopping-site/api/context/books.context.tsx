@@ -1,5 +1,6 @@
-import { Book } from "@/api/books";
+import { Book, getAllBooks } from "@/api/books";
 import { createContext, useContext, useEffect, useState } from "react";
+import useBooksAsyncStorage from "../asyncStorage/useBooks.localStorage";
 
 export interface BooksContextType {
     state: {
@@ -15,6 +16,8 @@ export interface BooksContextType {
 export const BooksContext = createContext<BooksContextType | undefined>(undefined);
 
 export const BooksProvider = ({ children }: { children: React.ReactNode }) => {
+    const { getBooksFromStorage, setBooksFromStorage } = useBooksAsyncStorage();
+
     const [state, setState] = useState<{
         ableBooks: Book[];
         readingList: Book[];
@@ -22,6 +25,37 @@ export const BooksProvider = ({ children }: { children: React.ReactNode }) => {
         ableBooks: [],
         readingList: [],
     });
+
+
+
+    useEffect(() => {
+        loadData();
+    }, [])
+
+    useEffect(() => {
+        if (state.ableBooks.length > 0 || state.readingList.length > 0) {
+            setBooksFromStorage(state.ableBooks, state.readingList);
+        }
+    }, [state])
+
+    const loadData = async () => {
+        // get data from AsyncStorage
+        const books = await loadDataFromLocalStorage();
+        // if has, save it to state
+        if (books && (books.ableBooks.length > 0 || books.readingList.length > 0)) {
+            setState({ ableBooks: books.ableBooks, readingList: books.readingList })
+        } else {
+            // if not, get data from API
+            // and save it
+            const books = getAllBooks();
+            setState({ ableBooks: books, readingList: [] })
+        }
+    }
+
+    const loadDataFromLocalStorage = async () => {
+        const books = await getBooksFromStorage();
+        return books;
+    };
 
     return (
         <BooksContext.Provider value={{ state, setState }}>
@@ -65,6 +99,8 @@ export const useBooksContext = () => {
             ...prevState,
             readingList: [...prevState.readingList, book]
         }));
+
+        // setBooksFromStorage(state.ableBooks, state.readingList);
     }
 
     const removeBookInReadingBooks = (book: Book) => {
@@ -78,6 +114,8 @@ export const useBooksContext = () => {
             ...prevState,
             readingList: prevState.readingList.filter((el: Book) => book.ISBN !== el.ISBN)
         }));
+
+        // setBooksFromStorage(state.ableBooks, state.readingList);
     }
 
     return {

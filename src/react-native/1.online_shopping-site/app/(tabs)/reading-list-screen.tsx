@@ -3,10 +3,10 @@ import WrapperCustom from '@/components/WrapperCustom';
 import { RFValue } from 'react-native-responsive-fontsize';
 import CardBook from '@/components/CardBook';
 import { useContext, useEffect, useState } from 'react';
-import { BooksContext, useBooksContext } from '@/api/books.context';
+import { BooksContext, useBooksContext } from '@/api/context/books.context';
 import { Book } from '@/api/books';
 
-export default function TabTwoScreen() {
+export default function ReadinListScreen() {
   const { readingListContext } = useBooksContext();
   const [readingList, setReadingList] = useState<Book[]>();
 

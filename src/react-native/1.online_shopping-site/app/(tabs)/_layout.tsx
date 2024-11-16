@@ -45,7 +45,7 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="reading-list"
+          name="reading-list-screen"
           options={{
             title: 'Lista de Lectura',
             tabBarIcon: ({ color }) => <IconSymbol size={28} name="star" color={color} />,

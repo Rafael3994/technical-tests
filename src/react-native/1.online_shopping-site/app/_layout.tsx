@@ -9,7 +9,8 @@ import 'react-native-reanimated';
 import "@/global.css"
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { BooksProvider } from '@/api/books.context';
+import { BooksProvider } from '@/api/context/books.context';
+import useBooksAsyncStorage from '@/api/asyncStorage/useBooks.localStorage';
 
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -30,7 +31,6 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
 
 
   return (

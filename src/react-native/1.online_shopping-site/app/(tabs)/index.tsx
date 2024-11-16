@@ -1,30 +1,24 @@
 import { Book, getAllBooks } from '@/api/books';
-import { BooksContext, useBooksContext } from '@/api/books.context';
+import { useBooksContext } from '@/api/context/books.context';
+import useBooksAsyncStorage from '@/api/asyncStorage/useBooks.localStorage';
 import CardBook from '@/components/CardBook';
 import WrapperCustom from '@/components/WrapperCustom';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export default function HomeScreen() {
   const { ableBooksContext, setAbleBooksState } = useBooksContext();
+
   const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-
-    if (ableBooksContext && ableBooksContext.length > 0) {
-      setBooks(ableBooksContext);
-    } else {
-      const books = getAllBooks();
-      setAbleBooksState(books)
-    }
+    setBooks(ableBooksContext);
   }, [])
 
   useEffect(() => {
     setBooks(ableBooksContext);
   }, [ableBooksContext])
-
-  // 1:36
 
   return (
     <WrapperCustom>
