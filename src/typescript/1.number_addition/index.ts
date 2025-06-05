@@ -17,7 +17,9 @@
 // INPUT: "10 2One Number*1*"
 // OUTPUT: 13
 
-function NumberAddition(str: string) {
+export function numberAddition(str: string) {
+  if (typeof str !== 'string') throw new Error('The param must be a string');
+
   let totalSum: number = 0;
   // string to concat the following numbers
   let concatNumber: string = '';
@@ -35,4 +37,4 @@ function NumberAddition(str: string) {
 }
 
 // console.log(NumberAddition("75Number9"));
-console.log(NumberAddition("10 2One@# Number*1*"));
+console.log(numberAddition("10 2One@# Number*1*"));

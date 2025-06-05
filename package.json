@@ -5,19 +5,23 @@
   "description": "differents technical test to put me on approval",
   "main": "index.js",
   "scripts": {
-
     "typescript-1": "tsc && node ./dist/1.number_addition/index.js",
+    "test-typescript-1": "tsc && jest ./dist/1.number_addition/index.test.js",
     "typescript-2": "tsc && node ./dist/2.sator-square/index.js",
     "typescript-3": "tsc && node ./dist/3.sort_by_name/index.js",
-
+    "typescript-4": "tsc && node ./dist/4.repeat-number/index.js",
+    "test-typescript-4": "tsc && jest ./dist/4.repeat-number/index.test.js",
+    "typescript-5": "tsc && node ./dist/5.mach_the_words/index.js",
+    "test-typescript-5": "tsc && jest ./dist/5.mach_the_words/index.test.js",
     "angular-1": "cd ./src/angular/1.online_shopping_site && ng serve",
-
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-typescript": "^7.26.0",
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0",
     "standard": "^17.1.2",
     "typescript": "^5.6.3"
   },

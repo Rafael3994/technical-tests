@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Text, View, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Image, Text, View, FlatList, ActivityIndicator, Dimensions } from 'react-native';
 import WrapperCustom from '@/components/WrapperCustom';
 import { RFValue } from 'react-native-responsive-fontsize';
 import CardBook from '@/components/CardBook';
@@ -18,27 +18,29 @@ export default function ReadinListScreen() {
 
   return (
     <WrapperCustom>
-      <View style={{ height: 70, paddingVertical: 10 }}>
-        <View className='flex-1 items-center justify-center'>
-          <Text style={[styles.text, { fontSize: RFValue(16) }]}>Lista de Lectura</Text>
-        </View>
-      </View>
-
-      <FlatList
-        style={{ flexGrow: 1, paddingHorizontal: 15 }}
-        data={readingList}
-        ItemSeparatorComponent={() => <View style={{ marginVertical: 10 }} />}
-        keyExtractor={(book) => book.ISBN}
-        ListEmptyComponent={
+      <View>
+        <View style={{ height: 70, paddingVertical: 10 }}>
           <View className='flex-1 items-center justify-center'>
-            <Text className='font-semibold'>No hay libros en la lista de lectura</Text>
+            <Text style={[styles.text, { fontSize: RFValue(16) }]}>Lista de Lectura</Text>
           </View>
-        }
-        renderItem={({ item: book }) => (
-          <CardBook book={book} remove />
-        )}
-      />
-    </WrapperCustom>
+        </View>
+
+        <FlatList
+          style={{ flexGrow: 1, paddingHorizontal: 15 }}
+          data={readingList}
+          ItemSeparatorComponent={() => <View style={{ marginVertical: 10 }} />}
+          keyExtractor={(book) => book.ISBN}
+          ListEmptyComponent={
+            <View className='flex-1 items-center justify-center'>
+              <Text className='font-semibold'>No hay libros en la lista de lectura</Text>
+            </View>
+          }
+          renderItem={({ item: book }) => (
+            <CardBook book={book} remove />
+          )}
+        />
+      </View >
+    </WrapperCustom >
   );
 }
 
